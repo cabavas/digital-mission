@@ -8,7 +8,7 @@ class CreateAccPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff1e1b3c),
       body: Center(
         child: Column(

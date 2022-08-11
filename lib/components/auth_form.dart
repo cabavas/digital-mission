@@ -10,6 +10,8 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
+  bool _isObscure = true;
+  bool _isObscureConfirm = true;
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Map<String, String> _authData = {
@@ -22,143 +24,128 @@ class _AuthFormState extends State<AuthForm> {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
       child: Container(
-        width: deviceSize.width * 0.75,
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'Nome',
-                    labelStyle: TextStyle(color: Colors.white),
-                    fillColor: Color(0xff1e1b3c),
-                    filled: true,
+        color: Color(0xff1e1b3c),
+        width: deviceSize.width * 0.90,
+        child: Column(
+          children: [
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      labelText: 'Nome',
+                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: Color(0xff1e1b3c),
+                      filled: true,
+                    ),
+                    keyboardType: TextInputType.text,
                   ),
-                  keyboardType: TextInputType.text,
-                ),
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    labelStyle: TextStyle(color: Colors.white),
-                    fillColor: Color(0xff1e1b3c),
-                    filled: true,
+                  SizedBox(height: 2),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      labelText: 'E-mail',
+                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: Color(0xff1e1b3c),
+                      filled: true,
+                    ),
+                    keyboardType: TextInputType.emailAddress,
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    labelStyle: TextStyle(color: Colors.white),
-                    fillColor: Color(0xff1e1b3c),
-                    filled: true,
+                  SizedBox(height: 2),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      labelText: '@Instagram',
+                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: Color(0xff1e1b3c),
+                      filled: true,
+                    ),
+                    keyboardType: TextInputType.text,
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    labelStyle: TextStyle(color: Colors.white),
-                    fillColor: Color(0xff1e1b3c),
-                    filled: true,
+                  SizedBox(height: 2),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      labelText: 'Chave Pix',
+                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: Color(0xff1e1b3c),
+                      filled: true,
+                    ),
+                    keyboardType: TextInputType.text,
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                TextFormField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    labelStyle: TextStyle(color: Colors.white),
-                    fillColor: Color(0xff1e1b3c),
-                    filled: true,
+                  SizedBox(height: 2),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    obscureText: _isObscure,
+                    decoration: InputDecoration(
+                      labelText: 'Senha',
+                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: Color(0xff1e1b3c),
+                      filled: true,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
+                      suffixIconColor: Color(0xff5b74a6),
+                    ),
                   ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-              ],
+                  SizedBox(height: 2),
+                  TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    obscureText: _isObscureConfirm,
+                    decoration: InputDecoration(
+                      labelText: 'Confirmar Senha',
+                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: Color(0xff1e1b3c),
+                      filled: true,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscureConfirm
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscureConfirm = !_isObscureConfirm;
+                          });
+                        },
+                      ),
+                      suffixIconColor: Color(0xff5b74a6),
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                  SizedBox(height: 30),
+                ],
+              ),
             ),
-          ),
-          // child: Column(
-          //   children: [
-          //     TextFormField(
-          //       style: TextStyle(color: Colors.black),
-          //       decoration: InputDecoration(labelText: 'Nome'),
-          //       keyboardType: TextInputType.text,
-          //       onSaved: (name) => _authData['name'] = name ?? '',
-          //       validator: (_email) {
-          //         final email = _email ?? '';
-          //         if (email.trim().isEmpty || !email.contains('@')) {
-          //           return 'Informe um e-mail válido.';
-          //         }
-          //         return null;
-          //       },
-          //     ),
-          //     TextFormField(
-          //       style: TextStyle(color: Colors.white),
-          //       decoration: InputDecoration(labelText: 'E-mail'),
-          //       keyboardType: TextInputType.emailAddress,
-          //       onSaved: (email) => _authData['email'] = email ?? '',
-          //       validator: (_name) {
-          //         final name = _name ?? '';
-          //         if (name.length < 4) {
-          //           return 'Informe um e-mail válido.';
-          //         }
-          //         return null;
-          //       },
-          //     ),
-          //     TextFormField(
-          //       style: TextStyle(color: Colors.white),
-          //       decoration: InputDecoration(labelText: '@Instagram'),
-          //       keyboardType: TextInputType.emailAddress,
-          //       onSaved: (instagram) =>
-          //           _authData['instagram'] = instagram ?? '',
-          //       validator: (_instagram) {
-          //         final instagram = _instagram ?? '';
-          //         if (instagram.trim().isEmpty || !instagram.contains('@')) {
-          //           return 'Informe um @ válido.';
-          //         }
-          //         return null;
-          //       },
-          //     ),
-          //     TextFormField(
-          //       style: TextStyle(color: Colors.white),
-          //       decoration: InputDecoration(labelText: 'Chave Pix'),
-          //       keyboardType: TextInputType.text,
-          //       onSaved: (pix) => _authData['pix'] = pix ?? '',
-          //       validator: (_pix) {
-          //         final pix = _pix ?? '';
-          //         if (pix.trim().isEmpty || !pix.contains('@')) {
-          //           return 'Informe um e-mail válido.';
-          //         }
-          //         return null;
-          //       },
-          //     ),
-          //     TextFormField(
-          //       style: TextStyle(color: Colors.black),
-          //       decoration: InputDecoration(labelText: 'Senha'),
-          //       keyboardType: TextInputType.emailAddress,
-          //       obscureText: true,
-          //       controller: _passwordController,
-          //       onSaved: (password) => _authData['password'] = password ?? '',
-          //       validator: (_password) {
-          //         final password = _password ?? '';
-          //         if (password.isEmpty || password.length < 5) {
-          //           return 'Informe uma senha válida';
-          //         }
-          //         return null;
-          //       },
-          //     ),
-          //     SizedBox(height: 20),
-          //     TextButton(
-          //       onPressed: () {},
-          //       child: Text('ENTRAR'),
-          //     ),
-          //     Spacer(),
-          //   ],
-          // ),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, '/success'),
+              style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Color(0xff4267b2),
+                  textStyle: TextStyle(
+                    fontSize: 16,
+                    backgroundColor: Color(0xff4267b2),
+                    color: Colors.white,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 35,
+                    vertical: 5,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  )),
+              child: Text('Continuar'),
+            ),
+          ],
         ),
       ),
     );

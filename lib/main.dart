@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:mission/pages/login_page.dart';
+import 'package:mission/pages/successful.dart';
 import 'package:mission/utils/app_routes.dart';
 
 import 'pages/create_acc_page.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.LOGIN: (ctx) => LoginPage(),
         AppRoutes.CREATE_ACCOUNT: (ctx) => CreateAccPage(),
+        AppRoutes.SUCCESS: (ctx) => SuccessPage(),
       },
     );
   }

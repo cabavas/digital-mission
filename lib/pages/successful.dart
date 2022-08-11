@@ -23,6 +23,26 @@ class SuccessPage extends StatelessWidget {
             ),
             SizedBox(height: 50),
             Image.asset('assets/img/icon.png'),
+            SizedBox(height: 150),
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, '/'),
+              style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: Color(0xff4267b2),
+                  textStyle: TextStyle(
+                    fontSize: 16,
+                    backgroundColor: Color(0xff4267b2),
+                    color: Colors.white,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 35,
+                    vertical: 5,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  )),
+              child: Text('Fazer Login'),
+            ),
           ],
         ),
       ),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mission/pages/login_page.dart';
+import 'package:mission/pages/lost_password.dart';
 import 'package:mission/pages/successful.dart';
 import 'package:mission/utils/app_routes.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.LOGIN: (ctx) => LoginPage(),
         AppRoutes.CREATE_ACCOUNT: (ctx) => CreateAccPage(),
         AppRoutes.SUCCESS: (ctx) => SuccessPage(),
+        AppRoutes.LOST_PASSWORD: (ctx) => LostPasswordPage(),
       },
     );
   }

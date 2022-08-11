@@ -8,16 +8,18 @@ class CreateAccPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff1e1b3c),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset('assets/img/icon.png'),
-            SizedBox(height: 50),
-            AuthForm(),
-          ],
+        child: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('assets/img/icon.png'),
+              SizedBox(height: 50),
+              AuthForm(),
+            ],
+          ),
         ),
       ),
     );

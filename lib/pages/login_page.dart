@@ -19,14 +19,14 @@ class LoginPage extends StatelessWidget {
               text: 'Entrar com o Google',
               textColor: 0xff1b1e3c,
               backgroundColor: 0xffffffff,
-              route: 'facebook',
+              route: '/lost-password',
             ),
             const SizedBox(height: 5),
             const LoginButton(
               text: 'Entrar com o Facebook',
               textColor: 0xffffffff,
               backgroundColor: 0xff4267B2,
-              route: 'facebook',
+              route: 'lost-password',
             ),
             const SizedBox(height: 5),
             const LoginButton(

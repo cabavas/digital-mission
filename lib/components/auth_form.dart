@@ -86,7 +86,9 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                          _isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {

@@ -19,21 +19,24 @@ class LoginPage extends StatelessWidget {
               text: 'Entrar com o Google',
               textColor: 0xff1b1e3c,
               backgroundColor: 0xffffffff,
-              route: '/lost-password',
+              route: '/google',
+              image: 'assets/img/google.png',
             ),
             const SizedBox(height: 5),
             const LoginButton(
               text: 'Entrar com o Facebook',
               textColor: 0xffffffff,
               backgroundColor: 0xff4267B2,
-              route: 'lost-password',
+              route: '/lost-password',
+              image: 'assets/img/facebook.png',
             ),
             const SizedBox(height: 5),
             const LoginButton(
               text: 'Entrar com o Email',
               textColor: 0xffffffff,
               backgroundColor: 0xff242850,
-              route: 'email',
+              route: '/email',
+              image: 'assets/img/mail.png',
             ),
             const SizedBox(height: 5),
             Container(
@@ -61,6 +64,5 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

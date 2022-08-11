@@ -3,21 +3,18 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key}) : super(key: key);
+  const AuthForm({Key? key, this.validator}) : super(key: key);
 
+final String? Function(String?)? validator;
   @override
   _AuthFormState createState() => _AuthFormState();
 }
 
 class _AuthFormState extends State<AuthForm> {
+  final _formKey = GlobalKey<FormState>();
+
   bool _isObscure = true;
   bool _isObscureConfirm = true;
-  final _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  Map<String, String> _authData = {
-    'email': '',
-    'password': '',
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +83,7 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isObscure
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {

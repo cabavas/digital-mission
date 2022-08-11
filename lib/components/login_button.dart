@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class LoginButton extends StatelessWidget {
   final String text;
-  final String? image;
+  final String image;
   final int textColor;
   final int? backgroundColor;
   final String route;
@@ -10,7 +10,7 @@ class LoginButton extends StatelessWidget {
   const LoginButton({
     Key? key,
     required this.text,
-    this.image,
+    required this.image,
     required this.textColor,
     this.backgroundColor,
     required this.route,
@@ -24,19 +24,20 @@ class LoginButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
         ),
-        child: TextButton(
+        child: TextButton.icon(
+          label: Text(text),
+          icon: Image.asset(image),
           onPressed: () => Navigator.pushNamed(context, route),
           style: TextButton.styleFrom(
               primary: Color(textColor),
               backgroundColor: Color(backgroundColor ?? 0xff1b1e3c),
               textStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 14,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               )),
-          child: Text(text),
         ),
       ),
     );

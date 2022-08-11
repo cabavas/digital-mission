@@ -51,7 +51,8 @@ class _LostPasswordPageState extends State<LostPasswordPage> {
               ),
               SizedBox(height: 25),
               TextButton(
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.pushNamed(context, '/reset-password'),
                 style: TextButton.styleFrom(
                     primary: const Color(0xffffffff),
                     backgroundColor: const Color(0xff4267b2),
@@ -62,7 +63,7 @@ class _LostPasswordPageState extends State<LostPasswordPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18)),
                     padding: const EdgeInsets.symmetric(
-                        vertical: 5, horizontal: 15)),
+                        vertical: 5, horizontal: 25)),
                 child: Text('Continuar'),
               ),
             ],

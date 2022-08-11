@@ -46,6 +46,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_native_splash: ^2.2.7
   flutter_launcher_icons: ^0.10.0
+  provider: ^6.0.3
 
 flutter_native_splash: 
   color: "#1b1e3c"
@@ -55,16 +56,16 @@ flutter_native_splash:
 flutter_icons:
   android: launcher_icon
   ios: true
-  image_path: assets\img\icon.png
+  image_path: assets\img\logo.png
   min_sdk_android: 25 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: assets\img\icon.png
+    image_path: assets\img\logo.png
     background_color: "#1b1e3c"
     theme_color: "#1b1e3c"
   windows:
     generate: true
-    image_path: assets\img\icon.png
+    image_path: assets\img\logo.png
     icon_size: 48
 
 # For information on the generic Dart part of this file, see the

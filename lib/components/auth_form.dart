@@ -5,13 +5,21 @@ import 'package:flutter/material.dart';
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key, this.validator}) : super(key: key);
 
-final String? Function(String?)? validator;
+  final String? Function(String?)? validator;
   @override
   _AuthFormState createState() => _AuthFormState();
 }
 
 class _AuthFormState extends State<AuthForm> {
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  Map<String, String> _authData = {
+    'name': '',
+    'password': '',
+    'instagram': '',
+    'pix': '',
+    'email': '',
+  };
 
   bool _isObscure = true;
   bool _isObscureConfirm = true;
@@ -38,6 +46,14 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                     ),
                     keyboardType: TextInputType.text,
+                    onSaved: (name) => _authData['name'] = name ?? '',
+                    validator: (_name) {
+                      final name = _name ?? '';
+                      if (name.length < 3) {
+                        return 'Nome precisa ter mais de 2 caracteres.';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -81,18 +97,33 @@ class _AuthFormState extends State<AuthForm> {
                       labelStyle: TextStyle(color: Color(0xff5b74a6)),
                       fillColor: Color(0xff1e1b3c),
                       filled: true,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                      suffixIcon: IconTheme(
+                        data: IconThemeData(
+                          color: Colors.white,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
+                        child: IconButton(
+                          icon: Icon(_isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
                       ),
                       suffixIconColor: Color(0xff5b74a6),
                     ),
+                    controller: _passwordController,
+                    onSaved: (password) =>
+                        _authData['password'] = password ?? '',
+                    validator: (_password) {
+                      final password = _password ?? '';
+                      if (password.isEmpty || password.length < 6) {
+                        return 'A senha deve ter mais de 5 caracteres';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -103,21 +134,31 @@ class _AuthFormState extends State<AuthForm> {
                       labelStyle: TextStyle(color: Color(0xff5b74a6)),
                       fillColor: Color(0xff1e1b3c),
                       filled: true,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscureConfirm
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                      suffixIcon: IconTheme(
+                        data: IconThemeData(
+                          color: Colors.white,
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscureConfirm = !_isObscureConfirm;
-                          });
-                        },
+                        child: IconButton(
+                          icon: Icon(_isObscureConfirm
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            setState(() {
+                              _isObscureConfirm = !_isObscureConfirm;
+                            });
+                          },
+                        ),
                       ),
                       suffixIconColor: Color(0xff5b74a6),
                     ),
                     keyboardType: TextInputType.text,
+                    validator: (_password) {
+                      final password = _password ?? '';
+                      if (password != _passwordController.text) {
+                        return 'As senhas não conferem.';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(height: 30),
                 ],

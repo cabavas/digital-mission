@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
               text: 'Entrar com o Email',
               textColor: 0xffffffff,
               backgroundColor: 0xff242850,
-              route: '/email',
+              route: '/email-login',
               image: 'assets/img/mail.png',
             ),
             const SizedBox(height: 5),

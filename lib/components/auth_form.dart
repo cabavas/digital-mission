@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
@@ -23,6 +24,12 @@ class _AuthFormState extends State<AuthForm> {
 
   bool _isObscure = true;
   bool _isObscureConfirm = true;
+  String _name = '';
+  String _password = '';
+  String _confirmPassword = '';
+  String _email = '';
+  String _pix = '';
+  String _instagram = '';
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +53,14 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                     ),
                     keyboardType: TextInputType.text,
-                    onSaved: (name) => _authData['name'] = name ?? '',
-                    validator: (_name) {
-                      final name = _name ?? '';
-                      if (name.length < 3) {
-                        return 'Nome precisa ter mais de 2 caracteres.';
+                    validator: (name) {
+                      if (name != null && name.length < 3) {
+                        return 'O nome deve ter mais de 2 ccaracteres.';
+                      } else {
+                        return null;
                       }
-                      return null;
                     },
+                    onChanged: (name) => _name = name,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -65,6 +72,11 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                     ),
                     keyboardType: TextInputType.emailAddress,
+                    validator: (email) =>
+                        email != null && !EmailValidator.validate(email)
+                            ? 'Digite um email válido.'
+                            : null,
+                    onChanged: (email) => _email = email,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -76,6 +88,14 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                     ),
                     keyboardType: TextInputType.text,
+                    validator: (instagram) {
+                      if (instagram != null && !instagram.startsWith('@')) {
+                        return 'O usuário deve começar com @.';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (instagram) => _instagram = instagram,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -87,6 +107,14 @@ class _AuthFormState extends State<AuthForm> {
                       filled: true,
                     ),
                     keyboardType: TextInputType.text,
+                    validator: (pix) {
+                      if (pix!.isEmpty) {
+                        return 'Digite uma chave Pix';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (pix) => _pix = pix,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -114,16 +142,14 @@ class _AuthFormState extends State<AuthForm> {
                       ),
                       suffixIconColor: Color(0xff5b74a6),
                     ),
-                    controller: _passwordController,
-                    onSaved: (password) =>
-                        _authData['password'] = password ?? '',
-                    validator: (_password) {
-                      final password = _password ?? '';
-                      if (password.isEmpty || password.length < 6) {
-                        return 'A senha deve ter mais de 5 caracteres';
+                    validator: (password) {
+                      if (password != null && password.length < 6) {
+                        return 'A senha deve ter pelo menos 6 carateres.';
+                      } else {
+                        return null;
                       }
-                      return null;
                     },
+                    onChanged: (password) => _password = password,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -152,12 +178,13 @@ class _AuthFormState extends State<AuthForm> {
                       suffixIconColor: Color(0xff5b74a6),
                     ),
                     keyboardType: TextInputType.text,
-                    validator: (_password) {
-                      final password = _password ?? '';
-                      if (password != _passwordController.text) {
-                        return 'As senhas não conferem.';
+                    validator: (confirmPassword) {
+                      if (confirmPassword!.isEmpty ||
+                          confirmPassword != _password) {
+                        return 'As senhas informadas não conferem.';
+                      } else {
+                        return null;
                       }
-                      return null;
                     },
                   ),
                   SizedBox(height: 30),
@@ -165,7 +192,12 @@ class _AuthFormState extends State<AuthForm> {
               ),
             ),
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, '/success'),
+              onPressed: () {
+                final _isValidForm = _formKey.currentState!.validate();
+                if (_isValidForm) {
+                  Navigator.pushNamed(context, '/success');
+                }
+              },
               style: TextButton.styleFrom(
                   primary: Colors.white,
                   backgroundColor: Color(0xff4267b2),

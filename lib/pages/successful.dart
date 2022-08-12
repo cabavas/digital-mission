@@ -25,7 +25,10 @@ class SuccessPage extends StatelessWidget {
             Image.asset('assets/img/icon.png'),
             SizedBox(height: 150),
             TextButton(
-              onPressed: () => Navigator.pushNamed(context, '/'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
               style: TextButton.styleFrom(
                   primary: Colors.white,
                   backgroundColor: Color(0xff4267b2),

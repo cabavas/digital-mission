@@ -75,6 +75,18 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                           ),
                         ),
                       ),
+                      SizedBox(height: 15),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/lost-password'),
+                          child: Text(
+                            'Esqueci a senha',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
                       SizedBox(height: 50),
                       TextButton(
                         onPressed: () {},
@@ -92,7 +104,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                               vertical: 5, horizontal: 25),
                         ),
                         child: Text('Entrar'),
-                      )
+                      ),
                     ],
                   ),
                 ),

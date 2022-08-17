@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "84687051331",
+    "firebase_url": "https://digital-mission-358b7-default-rtdb.firebaseio.com",
+    "project_id": "digital-mission-358b7",
+    "storage_bucket": "digital-mission-358b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84687051331:android:3c2670386c8f92159f12f6",
+        "android_client_info": {
+          "package_name": "com.example.mission"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84687051331-1ghemhdqsascplk6k5i35i7ds3v3osic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2eJzkGh60p-namW8v43_nM3MX3YcE9jA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84687051331-1ghemhdqsascplk6k5i35i7ds3v3osic.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "84687051331-r0h4n14cecfd72i57ere3p67fr33cp82.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.flutter.flutter.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

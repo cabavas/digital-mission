@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
               textColor: 0xffffffff,
               backgroundColor: 0xff4267B2,
               route: '/lost-password',
-              image: 'assets/img/facebook.png',
+              image: 'assets/img/Facebook.png',
             ),
             const SizedBox(height: 5),
             const LoginButton(

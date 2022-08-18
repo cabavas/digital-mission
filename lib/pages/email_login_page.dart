@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/auth.dart';
+
 class EmailLoginPage extends StatefulWidget {
   const EmailLoginPage({Key? key}) : super(key: key);
 
@@ -10,6 +12,21 @@ class EmailLoginPage extends StatefulWidget {
 bool _isObscure = true;
 
 class _EmailLoginPageState extends State<EmailLoginPage> {
+  final auth = Auth();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  String get _email => _emailController.text;
+  String get _password => _passwordController.text;
+
+  void _submit() async {
+    try {
+      await auth.signInWithEmail(_email, _password);
+    } catch (e) {
+      print('DEU ERRO Ó');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -29,6 +46,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: _emailController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           prefixIcon: IconTheme(
@@ -45,6 +63,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                         keyboardType: TextInputType.emailAddress,
                       ),
                       TextFormField(
+                        controller: _passwordController,
                         style: TextStyle(color: Colors.white),
                         obscureText: _isObscure,
                         decoration: InputDecoration(
@@ -89,7 +108,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                       ),
                       SizedBox(height: 50),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () => _submit(),
                         style: TextButton.styleFrom(
                           primary: const Color(0xffffffff),
                           backgroundColor: const Color(0xff4267b2),

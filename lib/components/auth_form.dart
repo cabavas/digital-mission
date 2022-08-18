@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mission/components/auth.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key, this.validator}) : super(key: key);
@@ -12,7 +15,12 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
+  final auth = Auth();
+  final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _pixController = TextEditingController();
+  final _instagramController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Map<String, String> _authData = {
     'name': '',
@@ -24,12 +32,6 @@ class _AuthFormState extends State<AuthForm> {
 
   bool _isObscure = true;
   bool _isObscureConfirm = true;
-  String _name = '';
-  String _password = '';
-  String _confirmPassword = '';
-  String _email = '';
-  String _pix = '';
-  String _instagram = '';
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,7 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       }
                     },
-                    onChanged: (name) => _name = name,
+                    onChanged: (name) => _authData['name'] = name,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -76,7 +78,7 @@ class _AuthFormState extends State<AuthForm> {
                         email != null && !EmailValidator.validate(email)
                             ? 'Digite um email válido.'
                             : null,
-                    onChanged: (email) => _email = email,
+                    onChanged: (email) => _authData['email'] = email,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -95,7 +97,8 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       }
                     },
-                    onChanged: (instagram) => _instagram = instagram,
+                    onChanged: (instagram) =>
+                        _authData['instagram'] = instagram,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -114,7 +117,7 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       }
                     },
-                    onChanged: (pix) => _pix = pix,
+                    onChanged: (pix) => _authData['pix'] = pix,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -149,7 +152,7 @@ class _AuthFormState extends State<AuthForm> {
                         return null;
                       }
                     },
-                    onChanged: (password) => _password = password,
+                    onChanged: (password) => _authData['password'] = password,
                   ),
                   SizedBox(height: 2),
                   TextFormField(
@@ -180,7 +183,7 @@ class _AuthFormState extends State<AuthForm> {
                     keyboardType: TextInputType.text,
                     validator: (confirmPassword) {
                       if (confirmPassword!.isEmpty ||
-                          confirmPassword != _password) {
+                          confirmPassword != _authData['password']) {
                         return 'As senhas informadas não conferem.';
                       } else {
                         return null;
@@ -195,6 +198,7 @@ class _AuthFormState extends State<AuthForm> {
               onPressed: () {
                 final _isValidForm = _formKey.currentState!.validate();
                 if (_isValidForm) {
+                  auth.createUser(_authData);
                   Navigator.pushNamed(context, '/success');
                 }
               },

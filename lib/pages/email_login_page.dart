@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/auth.dart';
@@ -29,6 +30,8 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('##############################################');
+    print(FirebaseAuth.instance.currentUser);
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color(0xff1e1b3c),

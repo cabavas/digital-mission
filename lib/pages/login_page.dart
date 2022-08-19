@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
               text: 'Entrar com o Google',
               textColor: 0xff1b1e3c,
               backgroundColor: 0xffffffff,
-              route: '/google',
+              route: '/home-page',
               image: 'assets/img/google.png',
             ),
             const SizedBox(height: 5),

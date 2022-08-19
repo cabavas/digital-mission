@@ -5,4 +5,5 @@ class AppRoutes {
   static const LOST_PASSWORD = '/lost-password';
   static const RESET_PASSWORD = '/reset-password';
   static const EMAIL_LOGIN = '/email-login';
+  static const HOME_PAGE = '/home-page';
 }

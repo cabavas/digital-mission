@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mission/firebase_options.dart';
 import 'package:mission/pages/email_login_page.dart';
+import 'package:mission/pages/home_page.dart';
 import 'package:mission/pages/login_page.dart';
 import 'package:mission/pages/lost_password.dart';
 import 'package:mission/pages/reset_password_page.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.LOST_PASSWORD: (ctx) => LostPasswordPage(),
         AppRoutes.RESET_PASSWORD: (ctx) => ResetPasswordPage(),
         AppRoutes.EMAIL_LOGIN: (ctx) => EmailLoginPage(),
+        AppRoutes.HOME_PAGE: (ctx) => HomePage(),
       },
     );
   }

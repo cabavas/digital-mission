@@ -26,21 +26,22 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           });
-    } catch (e) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacementNamed(context, '/home-page');
+    } on FirebaseAuthException catch (e) {
       print('DEU ERRO Ó');
+      print(e.message);
+      print(e.code);
     }
-    Navigator.pushReplacementNamed(context, '/home-page');
   }
 
   @override
   Widget build(BuildContext context) {
-    print('##############################################');
-    print(FirebaseAuth.instance.currentUser);
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff1e1b3c),
+      backgroundColor: const Color(0xff1e1b3c),
       body: Center(
         child: SingleChildScrollView(
           reverse: true,
@@ -48,16 +49,16 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset('assets/img/icon.png'),
-              SizedBox(height: 50),
-              Container(
+              const SizedBox(height: 50),
+              SizedBox(
                 width: deviceSize.width * 0.90,
                 child: Form(
                   child: Column(
                     children: [
                       TextFormField(
                         controller: _emailController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(
                           prefixIcon: IconTheme(
                             data: IconThemeData(
                               color: Colors.white,
@@ -73,21 +74,21 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                       ),
                       TextFormField(
                         controller: _passwordController,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         obscureText: _isObscure,
                         decoration: InputDecoration(
-                          prefixIcon: IconTheme(
+                          prefixIcon: const IconTheme(
                             data: IconThemeData(
                               color: Colors.white,
                             ),
                             child: Icon(Icons.lock_outline_rounded),
                           ),
                           labelText: 'Senha',
-                          labelStyle: TextStyle(color: Color(0xff5b74a6)),
-                          fillColor: Color(0xff1e1b3c),
+                          labelStyle: const TextStyle(color: Color(0xff5b74a6)),
+                          fillColor: const Color(0xff1e1b3c),
                           filled: true,
                           suffixIcon: IconTheme(
-                            data: IconThemeData(
+                            data: const IconThemeData(
                               color: Colors.white,
                             ),
                             child: IconButton(
@@ -103,19 +104,19 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Align(
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: () =>
                               Navigator.pushNamed(context, '/lost-password'),
-                          child: Text(
+                          child: const Text(
                             'Esqueci a senha',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       TextButton(
                         onPressed: () => _submit(),
                         style: TextButton.styleFrom(
@@ -131,7 +132,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 5, horizontal: 25),
                         ),
-                        child: Text('Entrar'),
+                        child: const Text('Entrar'),
                       ),
                     ],
                   ),

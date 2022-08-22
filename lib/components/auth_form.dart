@@ -1,8 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mission/components/auth.dart';
 
@@ -11,18 +7,13 @@ class AuthForm extends StatefulWidget {
 
   final String? Function(String?)? validator;
   @override
-  _AuthFormState createState() => _AuthFormState();
+  AuthFormState createState() => AuthFormState();
 }
 
-class _AuthFormState extends State<AuthForm> {
+class AuthFormState extends State<AuthForm> {
   final auth = Auth();
-  final _nameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _pixController = TextEditingController();
-  final _instagramController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  Map<String, String> _authData = {
+  final Map<String, String> _authData = {
     'name': '',
     'password': '',
     'instagram': '',
@@ -38,7 +29,7 @@ class _AuthFormState extends State<AuthForm> {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
       child: Container(
-        color: Color(0xff1e1b3c),
+        color: const Color(0xff1e1b3c),
         width: deviceSize.width * 0.90,
         child: Column(
           children: [
@@ -47,8 +38,8 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 children: [
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                       labelText: 'Nome',
                       labelStyle: TextStyle(color: Color(0xff5b74a6)),
                       fillColor: Color(0xff1e1b3c),
@@ -64,10 +55,10 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     onChanged: (name) => _authData['name'] = name,
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                       labelText: 'E-mail',
                       labelStyle: TextStyle(color: Color(0xff5b74a6)),
                       fillColor: Color(0xff1e1b3c),
@@ -80,10 +71,10 @@ class _AuthFormState extends State<AuthForm> {
                             : null,
                     onChanged: (email) => _authData['email'] = email,
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                       labelText: '@Instagram',
                       labelStyle: TextStyle(color: Color(0xff5b74a6)),
                       fillColor: Color(0xff1e1b3c),
@@ -100,10 +91,10 @@ class _AuthFormState extends State<AuthForm> {
                     onChanged: (instagram) =>
                         _authData['instagram'] = instagram,
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
                       labelText: 'Chave Pix',
                       labelStyle: TextStyle(color: Color(0xff5b74a6)),
                       fillColor: Color(0xff1e1b3c),
@@ -119,17 +110,17 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     onChanged: (pix) => _authData['pix'] = pix,
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     obscureText: _isObscure,
                     decoration: InputDecoration(
                       labelText: 'Senha',
-                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
-                      fillColor: Color(0xff1e1b3c),
+                      labelStyle: const TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: const Color(0xff1e1b3c),
                       filled: true,
                       suffixIcon: IconTheme(
-                        data: IconThemeData(
+                        data: const IconThemeData(
                           color: Colors.white,
                         ),
                         child: IconButton(
@@ -143,7 +134,7 @@ class _AuthFormState extends State<AuthForm> {
                           },
                         ),
                       ),
-                      suffixIconColor: Color(0xff5b74a6),
+                      suffixIconColor: const Color(0xff5b74a6),
                     ),
                     validator: (password) {
                       if (password != null && password.length < 6) {
@@ -154,17 +145,17 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     onChanged: (password) => _authData['password'] = password,
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     obscureText: _isObscureConfirm,
                     decoration: InputDecoration(
                       labelText: 'Confirmar Senha',
-                      labelStyle: TextStyle(color: Color(0xff5b74a6)),
-                      fillColor: Color(0xff1e1b3c),
+                      labelStyle: const TextStyle(color: Color(0xff5b74a6)),
+                      fillColor: const Color(0xff1e1b3c),
                       filled: true,
                       suffixIcon: IconTheme(
-                        data: IconThemeData(
+                        data: const IconThemeData(
                           color: Colors.white,
                         ),
                         child: IconButton(
@@ -178,7 +169,7 @@ class _AuthFormState extends State<AuthForm> {
                           },
                         ),
                       ),
-                      suffixIconColor: Color(0xff5b74a6),
+                      suffixIconColor: const Color(0xff5b74a6),
                     ),
                     keyboardType: TextInputType.text,
                     validator: (confirmPassword) {
@@ -190,22 +181,22 @@ class _AuthFormState extends State<AuthForm> {
                       }
                     },
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),
             TextButton(
               onPressed: () {
-                final _isValidForm = _formKey.currentState!.validate();
-                if (_isValidForm) {
+                final isValidForm = _formKey.currentState!.validate();
+                if (isValidForm) {
                   auth.createUser(_authData);
                   Navigator.pushNamed(context, '/success');
                 }
               },
               style: TextButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Color(0xff4267b2),
-                  textStyle: TextStyle(
+                  backgroundColor: const Color(0xff4267b2),
+                  textStyle: const TextStyle(
                     fontSize: 16,
                     backgroundColor: Color(0xff4267b2),
                     color: Colors.white,
@@ -217,7 +208,7 @@ class _AuthFormState extends State<AuthForm> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   )),
-              child: Text('Continuar'),
+              child: const Text('Continuar'),
             ),
           ],
         ),

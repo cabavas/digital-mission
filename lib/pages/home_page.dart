@@ -13,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   bool _isObscure = false;
   double balance = 0;
-  bool _isLoading = true;
   String name = '';
 
   @override
@@ -21,22 +20,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final uid = FirebaseAuth.instance.currentUser!.uid;
     FirebaseFirestore.instance.collection('users').doc(uid).get().then((doc) {
-      print(doc.data());
       setState(() {
         balance = double.parse(doc.data()!['balance'].toString());
-        _isLoading = false;
-      });
-    });
-    final mission = FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance
-        .collection('missions')
-        .doc(uid)
-        .get()
-        .then((doc) {
-      print(doc.data());
-      setState(() {
-        name = (doc.data()!['name'].toString());
-        _isLoading = false;
       });
     });
   }
@@ -51,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0.0,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.menu,
               color: Colors.white,
             ),
@@ -74,20 +59,20 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xff045eac),
               ),
               child: Text('App'),
             ),
             ListTile(
-              title: Text('Item 1'),
+              title: const Text('Item 1'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Item 2'),
+              title: const Text('Item 2'),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -138,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 if (_isObscure)
                   Text(
                     'R\$ ${balance.toStringAsFixed(2)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
@@ -181,8 +166,8 @@ class _HomePageState extends State<HomePage> {
               if (snapshot.hasData) {
                 final data = snapshot.data;
                 final docs = data!.docs;
-                print('##############################################');
-                print(docs[0].data().toString());
+                // print('##############################################');
+                // print(docs[0].data().toString());
                 return Expanded(
                   child: ListView.builder(
                     itemCount: docs.length,
@@ -197,14 +182,14 @@ class _HomePageState extends State<HomePage> {
                                   'Recompensa',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(height: 15),
+                                const SizedBox(height: 15),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'R\$ ${docs[index].data()['reward'].toString()}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -213,36 +198,36 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.only(right: 35),
                                       child: CircleAvatar(
                                         backgroundImage: NetworkImage(
-                                            '${docs[index].data()['pic'].toString()}'),
+                                            docs[index].data()['pic'].toString()),
                                         radius: 25,
                                         backgroundColor: Colors.white,
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 15),
+                                const SizedBox(height: 15),
                                 Text(
                                   docs[index].data()['name'].toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(height: 15),
+                                const SizedBox(height: 15),
                                 Text(
                                   docs[index].data()['description'].toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 14,
                                   ),
                                 ),
-                                SizedBox(height: 15),
+                                const SizedBox(height: 15),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     TextButton(
                                       onPressed: () {},
-                                      child: Text(
+                                      child: const Text(
                                         'Termos e condições',
                                         style: TextStyle(fontSize: 8),
                                       ),
@@ -261,18 +246,18 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         TextButton(
                                           onPressed: () {},
-                                          child: const Text('Começar'),
                                           style: TextButton.styleFrom(
                                             primary: Colors.white,
-                                            backgroundColor: Color(0xff045eac),
+                                            backgroundColor: const Color(0xff045eac),
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 15),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                             ),
-                                            textStyle: TextStyle(fontSize: 12),
+                                            textStyle: const TextStyle(fontSize: 12),
                                           ),
+                                          child: const Text('Começar'),
                                         ),
                                       ],
                                     ),

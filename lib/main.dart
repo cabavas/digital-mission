@@ -16,7 +16,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,13 +32,13 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Quicksand-VariableFont_wght',
       ),
       routes: {
-        AppRoutes.LOGIN: (ctx) => LoginPage(),
-        AppRoutes.CREATE_ACCOUNT: (ctx) => CreateAccPage(),
-        AppRoutes.SUCCESS: (ctx) => SuccessPage(),
-        AppRoutes.LOST_PASSWORD: (ctx) => LostPasswordPage(),
-        AppRoutes.RESET_PASSWORD: (ctx) => ResetPasswordPage(),
-        AppRoutes.EMAIL_LOGIN: (ctx) => EmailLoginPage(),
-        AppRoutes.HOME_PAGE: (ctx) => HomePage(),
+        AppRoutes.login: (ctx) => const LoginPage(),
+        AppRoutes.createAccount: (ctx) => const CreateAccPage(),
+        AppRoutes.success: (ctx) => const SuccessPage(),
+        AppRoutes.lostPassword: (ctx) => const LostPasswordPage(),
+        AppRoutes.resetPassword: (ctx) => const ResetPasswordPage(),
+        AppRoutes.emailLogin: (ctx) => const EmailLoginPage(),
+        AppRoutes.homePage: (ctx) => const HomePage(),
       },
     );
   }
@@ -56,6 +56,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Text('Missão Digital');
+    return const Text('Missão Digital');
   }
 }

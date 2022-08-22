@@ -15,7 +15,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     final deviceSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Color(0xff1e1b3c),
+      backgroundColor: const Color(0xff1e1b3c),
       body: Center(
         child: SingleChildScrollView(
           reverse: true,
@@ -25,8 +25,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset('assets/img/icon.png'),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Criar nova senha',
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -35,14 +35,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   obscureText: _isObscure,
                   decoration: InputDecoration(
                     labelText: 'Senha',
-                    labelStyle: TextStyle(color: Color(0xff5b74a6)),
-                    fillColor: Color(0xff1e1b3c),
+                    labelStyle: const TextStyle(color: Color(0xff5b74a6)),
+                    fillColor: const Color(0xff1e1b3c),
                     filled: true,
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -54,17 +54,17 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         });
                       },
                     ),
-                    suffixIconColor: Color(0xff5b74a6),
+                    suffixIconColor: const Color(0xff5b74a6),
                   ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 TextFormField(
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   obscureText: _isObscureConfirm,
                   decoration: InputDecoration(
                     labelText: 'Confirmar Senha',
-                    labelStyle: TextStyle(color: Color(0xff5b74a6)),
-                    fillColor: Color(0xff1e1b3c),
+                    labelStyle: const TextStyle(color: Color(0xff5b74a6)),
+                    fillColor: const Color(0xff1e1b3c),
                     filled: true,
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -78,11 +78,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         });
                       },
                     ),
-                    suffixIconColor: Color(0xff5b74a6),
+                    suffixIconColor: const Color(0xff5b74a6),
                   ),
                   keyboardType: TextInputType.text,
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
@@ -96,7 +96,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           borderRadius: BorderRadius.circular(18)),
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 25)),
-                  child: Text('Continuar'),
+                  child: const Text('Continuar'),
                 ),
               ],
             ),

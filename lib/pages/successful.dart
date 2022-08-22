@@ -6,13 +6,13 @@ class SuccessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff1b1e3c),
+      backgroundColor: const Color(0xff1b1e3c),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Conta criada com sucesso',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -21,9 +21,9 @@ class SuccessPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Image.asset('assets/img/icon.png'),
-            SizedBox(height: 150),
+            const SizedBox(height: 150),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -31,8 +31,8 @@ class SuccessPage extends StatelessWidget {
               },
               style: TextButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Color(0xff4267b2),
-                  textStyle: TextStyle(
+                  backgroundColor: const Color(0xff4267b2),
+                  textStyle: const TextStyle(
                     fontSize: 16,
                     backgroundColor: Color(0xff4267b2),
                     color: Colors.white,
@@ -44,7 +44,7 @@ class SuccessPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   )),
-              child: Text('Fazer Login'),
+              child: const Text('Fazer Login'),
             ),
           ],
         ),

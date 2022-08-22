@@ -48,7 +48,7 @@ class AuthFormState extends State<AuthForm> {
                     keyboardType: TextInputType.text,
                     validator: (name) {
                       if (name != null && name.length < 3) {
-                        return 'O nome deve ter mais de 2 ccaracteres.';
+                        return 'O nome deve ter mais de 2 caracteres.';
                       } else {
                         return null;
                       }
@@ -189,8 +189,7 @@ class AuthFormState extends State<AuthForm> {
               onPressed: () {
                 final isValidForm = _formKey.currentState!.validate();
                 if (isValidForm) {
-                  auth.createUser(_authData);
-                  Navigator.pushNamed(context, '/success');
+                  auth.createUser(context, _authData);
                 }
               },
               style: TextButton.styleFrom(

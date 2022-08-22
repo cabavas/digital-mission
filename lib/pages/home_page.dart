@@ -183,93 +183,106 @@ class _HomePageState extends State<HomePage> {
                 final docs = data!.docs;
                 print('##############################################');
                 print(docs[0].data().toString());
-                return ListView.builder(
-                  itemCount: docs.length,
-                  shrinkWrap: true,
-                  itemBuilder: ((context, index) => Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Recompensa',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 15),
-                              Row(
-                                children: [
-                                  Text(
-                                    'R\$ ${docs[index].data()['reward'].toString()}',
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  // Image.asset('Imagem da missão')
-                                ],
-                              ),
-                              SizedBox(height: 15),
-                              Text(
-                                docs[index].data()['name'].toString(),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: docs.length,
+                    shrinkWrap: true,
+                    itemBuilder: ((context, index) => Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Card(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Recompensa',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                              ),
-                              SizedBox(height: 15),
-                              Text(
-                                docs[index].data()['description'].toString(),
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(height: 15),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      'Termos e condições',
-                                      style: TextStyle(fontSize: 8),
+                                SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'R\$ ${docs[index].data()['reward'].toString()}',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 35),
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            '${docs[index].data()['pic'].toString()}'),
+                                        radius: 25,
+                                        backgroundColor: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 15),
+                                Text(
+                                  docs[index].data()['name'].toString(),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Row(
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: const Text(
-                                          'Dispensar',
-                                          style: TextStyle(
-                                            color: Color(0xff045eac),
-                                            fontSize: 12,
+                                ),
+                                SizedBox(height: 15),
+                                Text(
+                                  docs[index].data()['description'].toString(),
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Termos e condições',
+                                        style: TextStyle(fontSize: 8),
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'Dispensar',
+                                            style: TextStyle(
+                                              color: Color(0xff045eac),
+                                              fontSize: 12,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: const Text('Começar'),
-                                        style: TextButton.styleFrom(
-                                          primary: Colors.white,
-                                          backgroundColor: Color(0xff045eac),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 15),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: const Text('Começar'),
+                                          style: TextButton.styleFrom(
+                                            primary: Colors.white,
+                                            backgroundColor: Color(0xff045eac),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 15),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                            ),
+                                            textStyle: TextStyle(fontSize: 12),
                                           ),
-                                          textStyle: TextStyle(fontSize: 12),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      )),
+                        )),
+                  ),
                 );
               } else {
                 return const Center(child: CircularProgressIndicator());

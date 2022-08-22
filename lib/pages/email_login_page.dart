@@ -23,9 +23,15 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
   void _submit() async {
     try {
       await auth.signInWithEmail(_email, _password);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Center(child: CircularProgressIndicator());
+          });
     } catch (e) {
       print('DEU ERRO Ó');
     }
+    Navigator.pushReplacementNamed(context, '/home-page');
   }
 
   @override

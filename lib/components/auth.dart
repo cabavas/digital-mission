@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class AuthBase {
   User? get currentUser;
@@ -23,6 +24,7 @@ class Auth implements AuthBase {
       'email': map['email'],
       'instagram': map['instagram'],
       'pix': map['pix'],
+      'balance': 0,
     });
   }
 

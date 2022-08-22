@@ -13,15 +13,30 @@ class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
   bool _isObscure = false;
   double balance = 0;
+  bool _isLoading = true;
+  String name = '';
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     final uid = FirebaseAuth.instance.currentUser!.uid;
     FirebaseFirestore.instance.collection('users').doc(uid).get().then((doc) {
       print(doc.data());
       setState(() {
         balance = double.parse(doc.data()!['balance'].toString());
+        _isLoading = false;
+      });
+    });
+    final mission = FirebaseAuth.instance.currentUser!.uid;
+    FirebaseFirestore.instance
+        .collection('missions')
+        .doc(uid)
+        .get()
+        .then((doc) {
+      print(doc.data());
+      setState(() {
+        name = (doc.data()!['name'].toString());
+        _isLoading = false;
       });
     });
   }
@@ -61,7 +76,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xff045eac),
               ),
               child: Text('App'),
             ),
@@ -110,7 +125,9 @@ class _HomePageState extends State<HomePage> {
               children: [
                 IconButton(
                   icon: Icon(
-                      _isObscure ? Icons.visibility : Icons.visibility_off),
+                    _isObscure ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.white,
+                  ),
                   onPressed: () {
                     setState(() {
                       _isObscure = !_isObscure;
@@ -118,15 +135,23 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 const SizedBox(width: 15),
-                Text(_isObscure.toString()),
                 if (_isObscure)
-                  Text(balance.toString(),
-                      style: TextStyle(color: Colors.white)),
+                  Text(
+                    'R\$ ${balance.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
                 if (!_isObscure)
                   Container(
                     width: 35,
                     height: 15,
-                    decoration: const BoxDecoration(color: Colors.white),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 const SizedBox(
                   height: 40,
@@ -139,7 +164,10 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('Missões'),
+              const Text(
+                'Missões',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               TextButton(
                 onPressed: () {},
                 child: const Text('Ver todas'),
@@ -153,40 +181,93 @@ class _HomePageState extends State<HomePage> {
               if (snapshot.hasData) {
                 final data = snapshot.data;
                 final docs = data!.docs;
-
+                print('##############################################');
+                print(docs[0].data().toString());
                 return ListView.builder(
                   itemCount: docs.length,
                   shrinkWrap: true,
-                  itemBuilder: ((context, index) => Card(
-                        child: Column(
-                          children: [
-                            const Text('Recompensa'),
-                            Row(
-                              children: [
-                                const Text('Valor da missão'),
-                                Image.asset('Imagem da missão')
-                              ],
-                            ),
-                            const Text('Título da missão'),
-                            const Text('Descrição da missão'),
-                            Row(
-                              children: [
-                                TextButton(
-                                    onPressed: () {},
-                                    child: const Text('Termos e condições')),
-                                Row(
-                                  children: [
-                                    TextButton(
-                                        onPressed: () {},
-                                        child: const Text('Dispensar')),
-                                    TextButton(
-                                        onPressed: () {},
-                                        child: const Text('Começar')),
-                                  ],
+                  itemBuilder: ((context, index) => Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Card(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Recompensa',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                children: [
+                                  Text(
+                                    'R\$ ${docs[index].data()['reward'].toString()}',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  // Image.asset('Imagem da missão')
+                                ],
+                              ),
+                              SizedBox(height: 15),
+                              Text(
+                                docs[index].data()['name'].toString(),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              ],
-                            )
-                          ],
+                              ),
+                              SizedBox(height: 15),
+                              Text(
+                                docs[index].data()['description'].toString(),
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                              SizedBox(height: 15),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Termos e condições',
+                                      style: TextStyle(fontSize: 8),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: const Text(
+                                          'Dispensar',
+                                          style: TextStyle(
+                                            color: Color(0xff045eac),
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {},
+                                        child: const Text('Começar'),
+                                        style: TextButton.styleFrom(
+                                          primary: Colors.white,
+                                          backgroundColor: Color(0xff045eac),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                          ),
+                                          textStyle: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       )),
                 );

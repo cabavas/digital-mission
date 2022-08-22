@@ -198,7 +198,9 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.only(right: 35),
                                       child: CircleAvatar(
                                         backgroundImage: NetworkImage(
-                                            docs[index].data()['pic'].toString()),
+                                            docs[index]
+                                                .data()['pic']
+                                                .toString()),
                                         radius: 25,
                                         backgroundColor: Colors.white,
                                       ),
@@ -245,17 +247,25 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                         TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            FirebaseFirestore.instance
+                                                .collection('missions')
+                                                .snapshots();
+                                            final datas = snapshot.data;
+                                            print(datas!.docs[index].id);
+                                          },
                                           style: TextButton.styleFrom(
                                             primary: Colors.white,
-                                            backgroundColor: const Color(0xff045eac),
+                                            backgroundColor:
+                                                const Color(0xff045eac),
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 15),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(18),
                                             ),
-                                            textStyle: const TextStyle(fontSize: 12),
+                                            textStyle:
+                                                const TextStyle(fontSize: 12),
                                           ),
                                           child: const Text('Começar'),
                                         ),

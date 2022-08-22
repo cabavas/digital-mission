@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../components/auth.dart';
 
 class EmailLoginPage extends StatefulWidget {
@@ -16,6 +15,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
   final auth = Auth();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  String errorMessage = '';
 
   String get _email => _emailController.text;
   String get _password => _passwordController.text;
@@ -31,9 +31,39 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, '/home-page');
     } on FirebaseAuthException catch (e) {
-      print('DEU ERRO Ó');
-      print(e.message);
-      print(e.code);
+      if (e.code == 'user-not-found') {
+        errorMessage = 'Usuário não encontrado';
+      } else if (e.code == 'wrong-password') {
+        errorMessage = 'Senha Inválida';
+      } else {
+        errorMessage = 'Ocorreu um erro inesperado';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Container(
+            padding: const EdgeInsets.all(16),
+            height: 90,
+            decoration: BoxDecoration(
+              color: const Color(0xff045eac),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(
+              child: Text(
+                errorMessage,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      );
     }
   }
 

@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage> {
   bool _isObscure = false;
   double balance = 0;
   String name = '';
+  
 
   @override
   initState() {
@@ -55,31 +56,31 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color(0xff045eac),
-              ),
-              child: Text('App'),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: <Widget>[
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Color(0xff045eac),
+      //         ),
+      //         child: Text('App'),
+      //       ),
+      //       ListTile(
+      //         title: const Text('Item 1'),
+      //         onTap: () {
+      //           Navigator.pop(context);
+      //         },
+      //       ),
+      //       ListTile(
+      //         title: const Text('Item 2'),
+      //         onTap: () {
+      //           Navigator.pop(context);
+      //         },
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -237,7 +238,48 @@ class _HomePageState extends State<HomePage> {
                                     Row(
                                       children: [
                                         TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            final datas = snapshot.data;
+                                            final missionId =
+                                                datas!.docs[index].id;
+                                            final userId = FirebaseAuth
+                                                .instance.currentUser!.uid;
+                                            FirebaseFirestore.instance
+                                                .collection('users')
+                                                .doc(userId)
+                                                .collection('accepted_missions')
+                                                .doc(missionId)
+                                                .delete();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        const Color(0xff045eac),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      'Você não participa mais da missão',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                ),
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                elevation: 0,
+                                              ),
+                                            );
+                                          },
                                           child: const Text(
                                             'Dispensar',
                                             style: TextStyle(
@@ -248,11 +290,60 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         TextButton(
                                           onPressed: () {
+                                            final datas = snapshot.data;
+                                            final missionId =
+                                                datas!.docs[index].id;
+                                            final userId = FirebaseAuth
+                                                .instance.currentUser!.uid;
                                             FirebaseFirestore.instance
                                                 .collection('missions')
                                                 .snapshots();
-                                            final datas = snapshot.data;
-                                            print(datas!.docs[index].id);
+                                            final mission = <String, dynamic>{
+                                              'missionName': datas.docs[index]
+                                                  .data()['name'],
+                                              'missionDescription': datas
+                                                  .docs[index]
+                                                  .data()['description'],
+                                              'missionPic': datas.docs[index]
+                                                  .data()['pic'],
+                                              'missionReward': datas.docs[index]
+                                                  .data()['reward'],
+                                            };
+                                            FirebaseFirestore.instance
+                                                .collection('users')
+                                                .doc(userId)
+                                                .collection('accepted_missions')
+                                                .doc(missionId)
+                                                .set(mission);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Container(
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        const Color(0xff045eac),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      'Você se inscreveu na missão',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                ),
+                                                behavior:
+                                                    SnackBarBehavior.floating,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                elevation: 0,
+                                              ),
+                                            );
                                           },
                                           style: TextButton.styleFrom(
                                             primary: Colors.white,
@@ -287,14 +378,15 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: false,
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = index),
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Início'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Pesquisar'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.star_border_outlined), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: ''),
+              icon: Icon(Icons.star_border_outlined), label: 'Favoritos'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Lista'),
         ],
         unselectedItemColor: Colors.black87,
         selectedItemColor: const Color(0xff045eac),

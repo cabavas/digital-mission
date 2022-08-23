@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "84687051331-r0h4n14cecfd72i57ere3p67fr33cp82.apps.googleusercontent.com",
+              "client_id": "84687051331-0gq3jbjo1ae8outgjcaaf517l5k676gv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "io.flutter.flutter.app"
+                "bundle_id": "com.example.mission"
               }
             }
           ]

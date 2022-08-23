@@ -22,6 +22,7 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
 
   void _submit() async {
     try {
+      const CircularProgressIndicator(backgroundColor: Colors.white,color: Colors.red,);
       await auth.signInWithEmail(_email, _password);
       showDialog(
           context: context,

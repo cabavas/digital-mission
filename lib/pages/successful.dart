@@ -26,8 +26,7 @@ class SuccessPage extends StatelessWidget {
             const SizedBox(height: 150),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacementNamed('/home-page');
               },
               style: TextButton.styleFrom(
                   primary: Colors.white,

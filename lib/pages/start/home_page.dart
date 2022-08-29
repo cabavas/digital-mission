@@ -49,6 +49,8 @@ class _HomePageState extends State<HomePage> {
                     .orderBy('date')
                     .snapshots(),
             builder: (context, snapshot) {
+              print('##########################');
+              print(snapshot.data!.docs);
               if (snapshot.hasData) {
                 return Expanded(
                   child: MissionsListView(snapshot: snapshot),

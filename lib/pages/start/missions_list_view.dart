@@ -17,6 +17,7 @@ class _MissionsListViewState extends State<MissionsListView> {
   Widget build(BuildContext context) {
     final data = widget.snapshot.data;
     final docs = data!.docs;
+
     return ListView.builder(
       itemCount: docs.length,
       shrinkWrap: true,
@@ -119,8 +120,8 @@ class _MissionsListViewState extends State<MissionsListView> {
                                 'description':
                                     datas.docs[index].data()['description'],
                                 'pic': datas.docs[index].data()['pic'],
-                                'reward':
-                                    datas.docs[index].data()['reward'],
+                                'reward': datas.docs[index].data()['reward'],
+                                'date': datas.docs[index].data()['date'],
                               };
                               try {
                                 await FirebaseFirestore.instance

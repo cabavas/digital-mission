@@ -48,8 +48,7 @@ class LoginPage extends StatelessWidget {
                 onPressed: () =>
                     Navigator.pushNamed(context, '/create-account'),
                 style: TextButton.styleFrom(
-                    primary: const Color(0xffffffff),
-                    backgroundColor: const Color(0xff1b1e3c),
+                    foregroundColor: const Color(0xffffffff), backgroundColor: const Color(0xff1b1e3c),
                     textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,

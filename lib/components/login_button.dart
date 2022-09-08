@@ -29,8 +29,7 @@ class LoginButton extends StatelessWidget {
           icon: Image.asset(image),
           onPressed: () => Navigator.pushNamed(context, route),
           style: TextButton.styleFrom(
-              primary: Color(textColor),
-              backgroundColor: Color(backgroundColor ?? 0xff1b1e3c),
+              foregroundColor: Color(textColor), backgroundColor: Color(backgroundColor ?? 0xff1b1e3c),
               textStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,

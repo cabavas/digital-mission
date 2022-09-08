@@ -193,8 +193,7 @@ class AuthFormState extends State<AuthForm> {
                 }
               },
               style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color(0xff4267b2),
+                  foregroundColor: Colors.white, backgroundColor: const Color(0xff4267b2),
                   textStyle: const TextStyle(
                     fontSize: 16,
                     backgroundColor: Color(0xff4267b2),

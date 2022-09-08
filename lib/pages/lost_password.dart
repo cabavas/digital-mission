@@ -54,8 +54,7 @@ class _LostPasswordPageState extends State<LostPasswordPage> {
                 onPressed: () =>
                     Navigator.pushNamed(context, '/reset-password'),
                 style: TextButton.styleFrom(
-                    primary: const Color(0xffffffff),
-                    backgroundColor: const Color(0xff4267b2),
+                    foregroundColor: const Color(0xffffffff), backgroundColor: const Color(0xff4267b2),
                     textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 12,

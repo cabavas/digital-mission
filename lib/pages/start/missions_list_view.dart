@@ -139,8 +139,7 @@ class _MissionsListViewState extends State<MissionsListView> {
                               }
                             },
                             style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor: const Color(0xff045eac),
+                              foregroundColor: Colors.white, backgroundColor: const Color(0xff045eac),
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
                               shape: RoundedRectangleBorder(
